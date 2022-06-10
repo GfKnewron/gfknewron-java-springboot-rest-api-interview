@@ -13,9 +13,9 @@ This project is a typical Spring Boot application that, as a candidate, you can 
 
 - You are to build a simple banking API.
 - Make available the following roles a BANK_MANAGER and a USER.
-- Implement the following scenarios:
 
 ## Scenarios
+- Implement the following scenarios:
 
 ### _A USER can manage their money_
 
