@@ -25,7 +25,7 @@ As a USER:
 1. I am not allowed to withdraw beyond my overdraft limit.
 1. Whenever I withdraw money that takes my balance to < 0, the system charges me £5.
 1. Whenever I withdraw money when my balance is < 0, the system charges me £8.
-1. My account is block after five consecutive events that led to charges.
+1. My account is block after three consecutive events that led to charges.
 
 ### _A BANK_MANAGER can manage USERs_
 
@@ -37,16 +37,17 @@ As a BANK_MANAGER:
 
 1. A USER can also Update and Delete their account.
 1. To discourage the use of overdraft (the £50 Borrowed money reserve):
-   1. Once a USER's balance is < 0, the system prompts the user with a friendly warning message for every further withdrawal before accepting the withdrawal.  
-   1. You are to decide how you want to implement accepting the withdrawal after the friendly warning message.
+   1. Once a USER's balance is < 0, the system would not accept further requests for withdrawal until 1 minute has elapsed.  
+   1. You are to decide if/how you want to communicate this to the USER.
+1. We care about logging and monitoring.  Refactor your solution with meaningful logging.
 
 ## Hints:
 
-1. You are to decide the NFRs you see fit.
+1. You are to decide the NFRs (Non-Functional Requirements) you see fit.
 1. Unit tests must accompany the solution.
 1. Integration tests must accompany the solution in exemplifying how to use the API.
 1. Write well-modelled, production-quality code.
-1. This exercise tests your experience with RESTful APIs.  It is an opportunity to demonstrate mature RESTful practices to exemplify your craft.
+1. This exercise tests your experience with RESTful APIs.  It is an opportunity to demonstrate a mature RESTful practices and by so doing exemplify your craft.
 1. Demonstrate you are an engineer, not just a great coder; think SOLID, Gang of Four, Design patterns, TDD, BDD, and secure programming.
 1. Be agile; a partial solution is more desirable than a non-working solution.
 1. We are a company that relies on being trusted.  When compared to delivery deadlines, we care equally or even more about delivering well-tested solutions to our users.
