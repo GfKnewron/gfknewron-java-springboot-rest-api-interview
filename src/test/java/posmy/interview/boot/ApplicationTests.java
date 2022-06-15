@@ -82,9 +82,9 @@ class ApplicationTests {
         ).andExpect(status().isOk());
 
         User updated = userRepository.findById(user.getId()).get();
-        assertEquals(user.getId(),updated.getId());
-        assertEquals(user.getAccount().getId(),updated.getAccount().getId());
-        assertEquals(user.getAccount().getAmount(),updated.getAccount().getAmount());
+        assertEquals(user.getId(), updated.getId());
+        assertEquals(user.getAccount().getId(), updated.getAccount().getId());
+        assertEquals(user.getAccount().getAmount(), updated.getAccount().getAmount());
     }
 
     @Test
@@ -131,6 +131,7 @@ class ApplicationTests {
                 post("/api/v1/manage/users/block/" + user.getId())
                         .with(csrf())
         ).andExpect(status().isNotModified());
+
     }
 
     @Test
@@ -139,9 +140,26 @@ class ApplicationTests {
         long userId = 1L;
 
         mvc.perform(
-                post("/api/v1/manage/users/block/" + userId)
+                post("/api/v1/manage/users/unblock/" + userId)
                         .with(csrf())
         ).andExpect(status().isOk());
+        Optional<User> user = userRepository.findById(userId);
+        assertTrue(user.isPresent(), "Unblocked user not found");
+        assertFalse(user.get().isBlockedFlag(), "User was not unblocked");
+    }
+
+    @Test
+    @DisplayName("Delete user")
+    void testDeleteUser() throws Exception {
+        long userId = 1L;
+
+        mvc.perform(
+                post("/api/v1/manage/users/delete/" + userId)
+                        .with(csrf())
+        ).andExpect(status().isOk());
+
+        Optional<User> deleted = userRepository.findById(userId);
+        assertTrue(deleted.get().isDeletedFlag());
     }
 
     @BeforeEach
