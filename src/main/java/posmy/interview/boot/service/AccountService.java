@@ -3,5 +3,7 @@ package posmy.interview.boot.service;
 import java.math.BigDecimal;
 
 public interface AccountService {
-    void deposit(BigDecimal amount);
+    BigDecimal deposit(Long userId, BigDecimal amount);
+
+    BigDecimal withdraw(Long userId, BigDecimal amount);
 }

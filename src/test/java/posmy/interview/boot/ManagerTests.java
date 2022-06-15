@@ -32,11 +32,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DisplayName("Rest API test")
+@DisplayName("Manager API test")
 @WithMockUser(roles = "BANK_MANAGER")
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class ApplicationTests {
+class ManagerTests {
 
     @Autowired
     private MockMvc mvc;
@@ -84,7 +84,7 @@ class ApplicationTests {
         User updated = userRepository.findById(user.getId()).get();
         assertEquals(user.getId(), updated.getId());
         assertEquals(user.getAccount().getId(), updated.getAccount().getId());
-        assertEquals(user.getAccount().getAmount(), updated.getAccount().getAmount());
+        assertEquals(user.getAccount().getBalance(), updated.getAccount().getBalance());
     }
 
     @Test
