@@ -1,6 +1,8 @@
 package posmy.interview.boot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.h2.tools.Server;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,10 +21,10 @@ import posmy.interview.boot.entity.User;
 import posmy.interview.boot.repository.UserRepository;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -41,6 +43,12 @@ class ApplicationTests {
 
     @Autowired
     UserRepository userRepository;
+
+    @BeforeAll
+    public static void initTest() throws SQLException {
+        Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082")
+                .start();
+    }
 
     @Test
     @DisplayName("User creation")
@@ -72,6 +80,11 @@ class ApplicationTests {
                         .content(new ObjectMapper().writeValueAsString(user))
                         .with(csrf())
         ).andExpect(status().isOk());
+
+        User updated = userRepository.findById(user.getId()).get();
+        assertEquals(user.getId(),updated.getId());
+        assertEquals(user.getAccount().getId(),updated.getAccount().getId());
+        assertEquals(user.getAccount().getAmount(),updated.getAccount().getAmount());
     }
 
     @Test
