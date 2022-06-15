@@ -12,9 +12,10 @@ import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 
-
+/**
+ * To show ability of switching between different strategies
+ */
 @Service
-@Deprecated
 public class BasicAccountService implements AccountService {
     public final BigDecimal overdraft = new BigDecimal(50);
     @Autowired

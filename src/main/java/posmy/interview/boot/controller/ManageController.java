@@ -57,7 +57,7 @@ public class ManageController {
     @PutMapping(path = "update", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateUser(@RequestBody UserDTO userDTO) {
         log.info(UPDATE_LOG, userDTO.getId());
-        UnaryOperator<User> function = (user) -> {
+        UnaryOperator<User> function = user -> {
             user.setBlockedFlag(userDTO.isBlockedFlag());
             return user;
         };
@@ -67,7 +67,7 @@ public class ManageController {
     @PostMapping(path = "block/{userId}")
     public ResponseEntity<Void> blockUser(@PathVariable(value = "userId") Long userId) {
         log.info(BLOCK_LOG, userId);
-        UnaryOperator<User> function = (user) -> {
+        UnaryOperator<User> function = user -> {
             user.setBlockedFlag(true);
             return user;
         };
@@ -77,7 +77,7 @@ public class ManageController {
     @PostMapping(path = "unblock/{userId}")
     public ResponseEntity<Void> unblockUser(@PathVariable(value = "userId") Long userId) {
         log.info(UNBLOCK_LOG, userId);
-        UnaryOperator<User> function = (user) -> {
+        UnaryOperator<User> function = user -> {
             user.setBlockedFlag(false);
             return user;
         };
@@ -87,7 +87,7 @@ public class ManageController {
     @PostMapping(path = "delete/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable(value = "userId") Long userId) {
         log.info(DELETE_LOG, userId);
-        UnaryOperator<User> function = (user) -> {
+        UnaryOperator<User> function = user -> {
             user.setDeletedFlag(true);
             return user;
         };

@@ -19,13 +19,12 @@ import java.util.List;
 @Service
 @Qualifier("RuleAccountService")
 public class RuleAccountService implements AccountService {
-    // TODO from app.overdraft property
+
     public final BigDecimal overdraft = new BigDecimal(50).negate();
 
     @Autowired
     UserRepository userRepository;
 
-    // TODO Autowired
     private static List<Rule> rules = new ArrayList<>();
 
     @PostConstruct

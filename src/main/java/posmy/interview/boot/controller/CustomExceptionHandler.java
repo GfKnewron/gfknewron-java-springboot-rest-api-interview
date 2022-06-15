@@ -13,7 +13,7 @@ import java.util.List;
 
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-    private String INCORRECT_OPERATION = "INCORRECT_OPERATION";
+    private static final String INCORRECT_OPERATION = "INCORRECT_OPERATION";
 
     @ExceptionHandler(FinancialException.class)
     public final ResponseEntity<ErrorResponse> handleUserNotFoundException
