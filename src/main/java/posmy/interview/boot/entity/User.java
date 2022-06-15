@@ -20,14 +20,13 @@ public class User {
     @GeneratedValue
     private Long id;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @NonNull
     private Account account = new Account();
 
-//    @UpdateTimestamp
-//    @Column(name = "modified_at")
-//    protected Instant modifiedAt;
+    private boolean blockedFlag = false;
+
+    private boolean deletedFlag = false;
 
     @Override
     public boolean equals(Object o) {
